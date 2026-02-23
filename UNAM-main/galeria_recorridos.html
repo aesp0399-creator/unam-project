@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorridos VR - Ingeniería Geológica UNAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="Imagenes/escudo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-gold': '#b08d57', 
+                        'unam-red': '#8a1538',  
+                        'geology-beige': '#f5f2eb', 
+                        'geology-dark': '#2c2c2c',  
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f2eb; /* Fondo Beige */
+            color: #2c2c2c;
+        }
+        
+        .text-outline-bg {
+            position: absolute;
+            font-size: 8rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(138, 21, 56, 0.08); /* Outline en color Vino sutil */
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .text-outline-bg { font-size: 4rem; -webkit-text-stroke: 1px rgba(138, 21, 56, 0.08); }
+        }
+
+        .hero-container {
+            position: relative;
+            overflow: hidden;
+            background-color: #f5f2eb;
+            border-bottom: 2px solid #b08d57;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tour-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            background: #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid #b08d57; /* Borde Dorado */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .tour-container iframe, .tour-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(138, 21, 56, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .play-overlay:hover {
+            background: rgba(138, 21, 56, 0.1);
+        }
+
+        .nav-link {
+            font-size: 1.25rem; /* Menú más grande */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto">
+        <header class="sticky top-0 z-40 w-full bg-white/90 shadow-md backdrop-blur-sm border-b border-unam-gold/30">
+            <nav class="py-6 px-10">
+                <div class="flex items-center justify-between">
+                    <div class="w-20 md:w-28 lg:w-32">
+                        <img src="https://www.ingenieria.unam.mx/nuestra_facultad/images/institucionales/escudo_fi_color.png" alt="FI UNAM" class="rounded-lg hover:scale-105 transition duration-300">
+                    </div>
+
+                    <ul class="nav-menu absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-xl md:shadow-none hidden md:flex space-y-4 md:space-y-0 md:space-x-8 p-6 md:p-0 items-center justify-center text-center">
+                        <li><a href="index.html" class="nav-link text-geology-dark hover:text-unam-red transition duration-200">Inicio</a></li>
+                        <li><a href="Proyecto.html" class="nav-link text-geology-dark hover:text-unam-red transition duration-200">Proyecto</a></li>
+                        <li><a href="galeria_recorridos.html" class="nav-link text-geology-dark hover:text-unam-red transition duration-200">Galeria</a></li>
+                        <li><a href="Modelos3D.html" class="nav-link text-geology-dark hover:text-unam-red transition duration-200" target="_blank" rel="noopener noreferrer">Modelos 3D</a></li>
+                        <li><a href="libros.html" class="nav-link text-geology-dark hover:text-unam-red transition duration-200">Manuales</a></li>
+                    </ul>
+
+                    <div class="w-20 md:w-28 lg:w-32">
+                        <img src="https://cdn.freelogovectors.net/wp-content/uploads/2020/01/UNAM_Universidad_Nacional_Autonoma_de_Mexico_Logo.png" alt="UNAM" class="rounded-lg hover:scale-105 transition duration-300">
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="w-full">
+            <section class="hero-container min-h-[45vh] flex flex-col items-center justify-center text-center px-4 py-20">
+                <span class="text-outline-bg">Recorridos VR</span>
+                <div class="relative z-10">
+                    <h1 class="font-serif text-5xl md:text-7xl font-bold text-unam-red mb-2 tracking-tight">Recorridos VR</h1>
+                    <p class="text-xl md:text-2xl text-geology-dark/70 font-light italic max-w-2xl mx-auto">
+                        Explora los laboratorios y edificios de nuestra facultad desde cualquier lugar.
+                    </p>
+                </div>
+            </section>
+
+            <section class="max-w-5xl mx-auto px-6 py-12 space-y-16">
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-unam-red scroll-reveal">
+                    <div class="mb-6 text-center md:text-left">
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-unam-red uppercase">Edificio J: Geología Física</h2>
+                        <p class="text-geology-dark/60 mt-2 italic text-sm font-semibold uppercase tracking-widest">Haz clic en la imagen para iniciar el recorrido</p>
+                    </div>
+                    <div class="tour-container" id="tour-1">
+                        <img src="Imagenes/Recorrido3.png" alt="Miniatura Edificio J">
+                        <div class="play-overlay">
+                            <div class="w-16 h-16 bg-unam-red rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition">
+                                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-unam-gold scroll-reveal">
+                    <div class="mb-6 text-center md:text-left">
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-unam-red uppercase">Edificio C: Laboratorios</h2>
+                        <p class="text-geology-dark/60 mt-2 italic text-sm font-semibold uppercase tracking-widest">Haz clic en la imagen para iniciar el recorrido</p>
+                    </div>
+                    <div class="tour-container" id="tour-2">
+                        <img src="Imagenes/Recorrido4.png" alt="Miniatura Edificio C">
+                        <div class="play-overlay">
+                            <div class="w-16 h-16 bg-unam-gold rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition">
+                                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-2 border-unam-gold p-10 rounded-xl shadow-xl text-center scroll-reveal">
+                    <h2 class="font-serif text-3xl font-bold text-unam-red mb-4 uppercase tracking-widest">Localidades Mineralógicas</h2>
+                    <p class="text-geology-dark/80 mb-8 max-w-2xl mx-auto text-lg">
+                        Complementa tu experiencia virtual explorando nuestro catálogo detallado de localidades geológicas en México.
+                    </p>
+                    <a href="localidades.html" class="inline-flex items-center bg-unam-red text-white hover:bg-unam-gold font-bold py-4 px-10 rounded-full transition transform hover:scale-105 shadow-xl">
+                        Explorar Localidades
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-white mt-12 py-10 px-6 text-center rounded-t-xl border-t-4 border-unam-red shadow-inner">
+            <p class="text-geology-dark font-bold text-sm mb-4 uppercase tracking-tighter">© 2026 UNAM - Facultad de Ingeniería. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-6">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" class="w-6 h-6 grayscale opacity-60 hover:opacity-100 transition cursor-pointer">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="TW" class="w-6 h-6 grayscale opacity-60 hover:opacity-100 transition cursor-pointer">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="IG" class="w-6 h-6 grayscale opacity-60 hover:opacity-100 transition cursor-pointer">
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function loadTour(tourId, videoUrl) {
+            const container = document.getElementById(tourId);
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', videoUrl);
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', '1');
+            iframe.setAttribute('allow', 'camera; microphone; vr; autoplay; encrypted-media');
+            container.innerHTML = '';
+            container.appendChild(iframe);
+            container.style.cursor = 'default';
+        }
+
+        document.getElementById('tour-1').addEventListener('click', function() {
+            loadTour('tour-1', 'https://ingenieria-unam.netlify.app/');
+        });
+
+        document.getElementById('tour-2').addEventListener('click', function() {
+            loadTour('tour-2', 'https://kuula.co/share/collection/7JJqT?logo=0&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

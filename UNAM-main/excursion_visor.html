@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Guía - UNAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-gold': '#b08d57', 
+                        'unam-red': '#8a1538',  
+                        'geology-beige': '#f5f2eb', 
+                        'geology-dark': '#2c2c2c',  
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fondo beige claro con contraste en texto oscuro */
+        body { 
+            background-color: #f5f2eb; 
+            color: #2c2c2c; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+        }
+
+        .main-frame { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 2rem; 
+        }
+        
+        /* Contenedor del PDF con borde dorado */
+        .pdf-container {
+            width: 100%;
+            max-width: 1100px;
+            height: 80vh;
+            background-color: #ffffff;
+            border: 1px solid #b08d57;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Botón estilo académico con contraste vino */
+        .btn-nav {
+            border: 2px solid #8a1538;
+            padding: 14px 40px;
+            background: transparent;
+            color: #8a1538;
+            font-weight: 800;
+            transition: all 0.3s;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 1rem; /* Tamaño más grande */
+        }
+        .btn-nav:hover { 
+            background: #8a1538; 
+            color: #f5f2eb; 
+        }
+        
+        .link-regresar {
+            margin-top: 1.5rem;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #b08d57;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+        .link-regresar:hover { color: #8a1538; }
+
+        .header-visor {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-frame">
+        <div class="header-visor">
+            <div class="w-24 md:w-32">
+                <img src="https://www.ingenieria.unam.mx/nuestra_facultad/images/institucionales/escudo_fi_color.png" alt="Logo FI">
+            </div>
+            <div class="w-24 md:w-32 text-right">
+                <img src="https://cdn.freelogovectors.net/wp-content/uploads/2020/01/UNAM_Universidad_Nacional_Autonoma_de_Mexico_Logo.png" alt="Logo UNAM">
+            </div>
+        </div>
+
+        <h1 id="ex-title" class="font-serif text-4xl md:text-6xl font-bold mb-8 tracking-tight uppercase text-unam-red text-center">Cargando...</h1>
+
+        <div class="pdf-container mb-10">
+            <embed id="pdf-viewer" src="" type="application/pdf" width="100%" height="100%" />
+        </div>
+
+        <div class="flex flex-col items-center gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
+                <button id="btn-anterior" class="btn-nav">ANTERIOR</button>
+                <button onclick="irInicio()" class="btn-nav">REGRESAR A LAS LOCALIDADES</button>
+                <button id="btn-siguiente" class="btn-nav">SIGUIENTE</button>
+            </div>
+            
+            <a href="localidades.html" class="link-regresar">Explorar más localidades</a>
+        </div>
+    </div>
+
+    <script>
+        const ordenGuias = ["TEPETATE", "CHARCAS", "XALOSTOC", "BOLEO"];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let localidadActual = urlParams.get('localidad') || 'TEPETATE';
+            const index = ordenGuias.indexOf(localidadActual);
+
+            const titleElement = document.getElementById('ex-title');
+            const pdfElement = document.getElementById('pdf-viewer');
+            const btnAnterior = document.getElementById('btn-anterior');
+            const btnSiguiente = document.getElementById('btn-siguiente');
+
+            titleElement.innerText = localidadActual;
+            pdfElement.src = `Imagenes/${localidadActual}/${localidadActual}.pdf`;
+
+            if (index > 0) {
+                btnAnterior.onclick = () => {
+                    window.location.href = `excursion_visor.html?localidad=${ordenGuias[index - 1]}`;
+                };
+            } else {
+                btnAnterior.style.opacity = "0.2";
+                btnAnterior.style.cursor = "not-allowed";
+                btnAnterior.style.borderColor = "#ccc";
+                btnAnterior.style.color = "#ccc";
+            }
+
+            if (index < ordenGuias.length - 1) {
+                btnSiguiente.onclick = () => {
+                    window.location.href = `excursion_visor.html?localidad=${ordenGuias[index + 1]}`;
+                };
+            } else {
+                btnSiguiente.style.opacity = "0.2";
+                btnSiguiente.style.cursor = "not-allowed";
+                btnSiguiente.style.borderColor = "#ccc";
+                btnSiguiente.style.color = "#ccc";
+            }
+        });
+
+        function irInicio() {
+            window.location.href = "localidades.html";
+        }
+    </script>
+</body>
+</html>

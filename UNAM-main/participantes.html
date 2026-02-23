@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participantes - Ingeniería Geológica UNAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="Imagenes/escudo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-gold': '#b08d57', 
+                        'unam-red': '#8a1538',  
+                        'geology-beige': '#f5f2eb', 
+                        'geology-dark': '#2c2c2c',  
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f5f2eb; color: #2c2c2c; font-family: 'Inter', sans-serif; }
+        
+        /* Menu y Escudos Mas Grandes */
+        .nav-link { font-size: 1.25rem; font-weight: 700; transition: color 0.3s ease; }
+        .nav-link:hover { color: #8a1538; }
+        
+        .hero-background {
+            background-color: #f5f2eb;
+            background-image: radial-gradient(rgba(176, 141, 87, 0.2) 1px, transparent 0);
+            background-size: 30px 30px;
+            position: relative;
+            border-bottom: 2px solid #b08d57;
+        }
+
+        /* Formato de Tarjetas Renovado */
+        .profile-card { 
+            background-color: #ffffff; 
+            border: 1px solid #d1cec7; 
+            border-radius: 1.5rem; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            overflow: hidden;
+        }
+        .profile-card:hover { 
+            transform: translateY(-10px); 
+            border-color: #8a1538; 
+            box-shadow: 0 20px 40px rgba(138, 21, 56, 0.1); 
+        }
+
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto">
+        <header class="sticky top-0 z-40 w-full bg-white/90 shadow-md backdrop-blur-sm border-b border-unam-gold/30">
+            <nav class="py-6 px-6 md:px-10 flex items-center justify-between">
+                <div class="w-24 md:w-32">
+                    <img src="https://www.ingenieria.unam.mx/nuestra_facultad/images/institucionales/escudo_fi_color.png" alt="Logo FI" class="rounded-lg">
+                </div>
+                
+
+                    <ul class="nav-menu absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-xl md:shadow-none hidden md:flex space-y-4 md:space-y-0 md:space-x-10 p-6 md:p-0 items-center justify-center text-center">
+                        <li><a href="index.html" class="nav-link text-geology-dark uppercase">Inicio</a></li>
+                        <li><a href="Proyecto.html" class="nav-link text-geology-dark uppercase">Proyecto</a></li>
+                        <li><a href="galeria_recorridos.html" class="nav-link text-geology-dark uppercase">Galeria</a></li>
+                        <li><a href="Modelos3D.html" class="nav-link text-geology-dark uppercase">Modelos 3D</a></li>
+                        <li><a href="libros.html" class="nav-link text-geology-dark uppercase">Manuales </a></li>
+                    </ul>
+
+
+                <div class="w-24 md:w-32">
+                    <img src="https://cdn.freelogovectors.net/wp-content/uploads/2020/01/UNAM_Universidad_Nacional_Autonoma_de_Mexico_Logo.png" alt="Logo UNAM" class="rounded-lg">
+                </div>
+            </nav>
+        </header>
+
+        <main class="w-full">
+            <section class="hero-background min-h-[30vh] flex flex-col items-center justify-center text-center px-4 py-16 mb-12">
+                <div class="relative z-10">
+                    <h1 class="font-serif text-5xl md:text-6xl font-bold text-unam-red mb-4 drop-shadow-sm">Equipo de Trabajo</h1>
+                    <p class="text-xl text-unam-gold font-medium italic uppercase tracking-widest">Proyecto PAPIME PE108024</p>
+                </div>
+            </section>
+
+            <section class="max-w-6xl mx-auto px-6 py-8">
+                
+                <h2 class="font-serif text-3xl text-unam-red mb-8 border-b-2 border-unam-gold pb-2 inline-block scroll-reveal uppercase">Responsable</h2>
+                <div class="profile-card mb-16 scroll-reveal">
+                    <div class="p-8 flex flex-col md:flex-row items-center md:items-start gap-10">
+                        <div class="w-56 h-72 flex-shrink-0 rounded-2xl overflow-hidden border-2 border-unam-gold">
+                            <img src="Imagenes/ALFREDO VICTORIA.jpg" alt="Ing. Alfredo Victoria Morales" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-serif text-3xl text-unam-red mb-1">Ing. Alfredo Victoria Morales</h3>
+                            <p class="text-unam-gold font-bold text-sm mb-4 uppercase tracking-tighter">Responsable del Proyecto</p>
+                            <p class="text-gray-600 text-sm italic mb-6">victoria@unam.mx | victoriamorales52@gmail.com</p>
+                            <div class="bg-geology-beige p-6 rounded-xl border border-unam-gold/20">
+                                <h4 class="font-bold text-geology-dark mb-3 border-b border-unam-gold/40 inline-block uppercase text-xs">Áreas de Interés:</h4>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-geology-dark font-medium">
+                                    <li>• Mineralogía</li>
+                                    <li>• Petrología metamórfica</li>
+                                    <li>• Gemología</li>
+                                    <li>• Yacimientos minerales</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="font-serif text-3xl text-unam-red mb-8 border-b-2 border-unam-gold pb-2 inline-block scroll-reveal uppercase">Corresponsable</h2>
+                <div class="profile-card mb-16 scroll-reveal">
+                    <div class="p-8 flex flex-col md:flex-row items-center md:items-start gap-10">
+                        <div class="w-56 h-72 flex-shrink-0 rounded-2xl overflow-hidden border-2 border-unam-gold">
+                            <img src="Imagenes/ALDO RAMOS.jpg" alt="Dr. Aldo Ramos Rosique" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-serif text-3xl text-unam-red mb-1">Dr. Aldo Ramos Rosique</h3>
+                            <p class="text-unam-gold font-bold text-sm mb-4 uppercase tracking-tighter">Corresponsable del Proyecto</p>
+                            <p class="text-gray-600 text-sm italic mb-6">a.ramos@unam.mx</p>
+                            <div class="bg-geology-beige p-6 rounded-xl border border-unam-gold/20">
+                                <h4 class="font-bold text-geology-dark mb-3 border-b border-unam-gold/40 inline-block uppercase text-xs">Áreas de Interés:</h4>
+                                <ul class="space-y-2 text-geology-dark font-medium">
+                                    <li>• Metalogenía de depósitos minerales</li>
+                                    <li>• Petrogénesis de rocas ígneas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="font-serif text-3xl text-unam-red mb-10 border-b-2 border-unam-gold pb-2 inline-block scroll-reveal uppercase">Académicos Participantes</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                    
+                    <div class="profile-card p-6 flex gap-6 items-start scroll-reveal">
+                        <img src="Imagenes/DRA EDITH FUENTES.jpg" class="w-32 h-44 object-cover rounded-xl border border-unam-gold" alt="Dra Edith Fuentes">
+                        <div>
+                            <h3 class="font-bold text-unam-red leading-tight">DRA. EDITH FUENTES GUZMÁN</h3>
+                            <p class="text-[10px] text-unam-gold font-bold uppercase mt-1 mb-3">Líneas de Investigación</p>
+                            <ul class="text-[11px] text-geology-dark font-medium space-y-1">
+                                <li>• Yacimientos minerales</li>
+                                <li>• Isótopos estables en inclusiones</li>
+                                <li>• Alteración hidrotermal</li>
+                                <li>• Metalogenia y Mineragrafía</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="profile-card p-6 flex gap-6 items-start scroll-reveal">
+                        <img src="Imagenes/KARINA MARTINEZ.jpg" class="w-32 h-44 object-cover rounded-xl border border-unam-gold" alt="Karina Martinez">
+                        <div>
+                            <h3 class="font-bold text-unam-red uppercase">Karina Martínez Bautista</h3>
+                            <p class="text-[11px] text-unam-gold font-bold mb-3 uppercase mt-1">karinamb276@gmail.com</p>
+                            <ul class="text-[11px] text-geology-dark font-medium space-y-1">
+                                <li>• Mineralogía y Petrografía</li>
+                                <li>• Petrología metamórfica</li>
+                                <li>• Gemología y Yacimientos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="profile-card p-6 flex gap-6 items-start scroll-reveal">
+                        <img src="Imagenes/JAVIER MEDINA.jpg" class="w-32 h-44 object-cover rounded-xl border border-unam-gold" alt="Ing. Francisco Medina">
+                        <div>
+                            <h3 class="font-bold text-unam-red uppercase">Ing. Francisco Medina Escutia</h3>
+                            <p class="text-[11px] text-unam-gold font-bold mb-3 uppercase mt-1">tht@geofisica.unam.mx</p>
+                            <ul class="text-[11px] text-geology-dark font-medium space-y-1">
+                                <li>• Mineralogía y Gemología</li>
+                                <li>• Petrología metamórfica</li>
+                                <li>• Yacimientos minerales</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="profile-card p-6 flex gap-6 items-start scroll-reveal">
+                        <img src="Imagenes/MAYUMY CABRERA.jpg" class="w-32 h-44 object-cover rounded-xl border border-unam-gold" alt="Dra. Mayumy Cabrera">
+                        <div>
+                            <h3 class="font-bold text-unam-red uppercase">Dra. Mayumy Cabrera Ramírez</h3>
+                            <p class="text-[11px] text-unam-gold font-bold mb-3 uppercase mt-1">mayumycr@unam.mx</p>
+                            <ul class="text-[11px] text-geology-dark font-medium space-y-1">
+                                <li>• Geología Marina</li>
+                                <li>• Sedimentología de playas</li>
+                                <li>• Erosión costera</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="font-serif text-3xl text-unam-red mb-10 border-b-2 border-unam-gold pb-2 inline-block scroll-reveal uppercase">Alumnos Participantes</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="profile-card p-8 text-center scroll-reveal">
+                        <img src="Imagenes/Maria Belen.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-unam-gold object-cover" alt="Maria Belen">
+                        <h3 class="font-bold text-unam-red text-sm uppercase">Maria Belen Hilario Ortiz</h3>
+                        <p class="text-[11px] text-unam-gold font-bold mt-2 italic uppercase">Ingeniería Geológica</p>
+                        <p class="text-[10px] text-geology-dark mt-1 font-medium">Geología regional</p>
+                    </div>
+
+                    <div class="profile-card p-8 text-center scroll-reveal">
+                        <img src="Imagenes/AXEL SEBASTIAN.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-unam-gold object-cover" alt="Axel Moreno">
+                        <h3 class="font-bold text-unam-red text-sm uppercase">Axel Sebastian Moreno Peralta</h3>
+                        <p class="text-[10px] text-geology-dark mt-2 font-medium">Mineralogía, Yacimientos, G. Histórica y Petrografía</p>
+                    </div>
+
+                    <div class="profile-card p-8 text-center scroll-reveal">
+                        <img src="Imagenes/ARTURO SAMPERIO.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-unam-gold object-cover" alt="Arturo Mendieta">
+                        <h3 class="font-bold text-unam-red text-sm uppercase">Arturo Miguel Mendieta Sampedro</h3>
+                        <p class="text-[10px] text-geology-dark mt-2 font-medium uppercase italic">Estudiante de Ingeniería</p>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+        
+        <footer class="bg-white mt-12 py-10 text-center border-t-4 border-unam-red shadow-inner">
+            <p class="text-geology-dark font-bold text-xs uppercase tracking-widest">© 2026 Universidad Nacional Autónoma de México</p>
+            <p class="text-gray-500 text-[10px] mt-2 italic">Facultad de Ingeniería - Departamento de Ingeniería Geológica.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            elements.forEach(element => observer.observe(element));
+        });
+    </script>
+</body>
+</html>

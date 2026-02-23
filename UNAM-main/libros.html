@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuales y Recursos - Ingeniería Geológica UNAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="Imagenes/escudo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-blue': '#1a237e',
+                        'unam-red': '#8a1538', /* Vino profundo para contraste */
+                        'unam-gold': '#b08d57', /* Dorado mineral */
+                        'geology-beige': '#f5f2eb', /* Fondo Beige */
+                        'geology-dark': '#2c2c2c', /* Texto oscuro */
+                    },
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'] 
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f5f2eb; color: #2c2c2c; font-family: 'Inter', sans-serif; }
+        
+        /* Contraste del Header */
+        .header-bg { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 2px solid #b08d57; }
+        
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; letter-spacing: -0.05em; line-height: 1; color: #8a1538; }
+
+        /* Títulos de menú más grandes */
+        .nav-link { font-size: 1.25rem; font-weight: 700; transition: color 0.3s ease; }
+
+        /* Contenedor del Visor - Fondo claro con borde dorado */
+        .resource-viewer {
+            width: 100%;
+            height: 80vh;
+            background: #ffffff;
+            border-radius: 1.5rem;
+            border: 2px solid #b08d57;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card {
+            background: #ffffff;
+            border: 1px solid #d1cec7;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: #8a1538;
+            transform: translateY(-5px);
+            background: rgba(138, 21, 56, 0.05);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <header class="header-bg sticky top-0 z-50">
+        <nav class="container mx-auto py-6 px-10 flex items-center justify-between">
+            <div class="w-24 md:w-32">
+                <img src="https://www.ingenieria.unam.mx/nuestra_facultad/images/institucionales/escudo_fi_color.png" alt="Logo FI">
+            </div>
+            
+            <ul class="hidden md:flex space-x-10 items-center">
+                <li><a href="index.html" class="nav-link text-geology-dark hover:text-unam-red">Inicio</a></li>
+                <li><a href="Proyecto.html" class="nav-link text-geology-dark hover:text-unam-red">Proyecto</a></li>
+                <li><a href="galeria_recorridos.html" class="nav-link text-geology-dark hover:text-unam-red">Galeria</a></li>
+                <li><a href="Modelos3D.html" class="nav-link text-geology-dark hover:text-unam-red">Modelos 3D</a></li>
+                <li><a href="libros.html" class="nav-link text-unam-red underline decoration-4 underline-offset-8">Manuales y Recursos</a></li>
+            </ul>
+
+            <div class="w-24 md:w-32">
+                <img src="https://cdn.freelogovectors.net/wp-content/uploads/2020/01/UNAM_Universidad_Nacional_Autonoma_de_Mexico_Logo.png" alt="Logo UNAM">
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section class="mb-16 scroll-reveal">
+            <h1 class="hero-title uppercase mb-4">Recursos<br><span class="text-geology-dark">Educativos</span></h1>
+            <p class="text-xl text-unam-red font-bold italic max-w-2xl">
+                Material de apoyo técnico y académico para el estudio de la Geología.
+            </p>
+        </section>
+
+        <section class="mb-20 scroll-reveal" data-delay="200">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-unam-red uppercase tracking-wider">Manual de Prácticas</h2>
+                    <p class="text-geology-dark font-medium">Guía interactiva para laboratorio y campo.</p>
+                </div>
+                <a href="https://publuu.com/flip-book/552109/2107511" target="_blank" class="bg-unam-red hover:bg-red-800 text-white px-8 py-3 rounded-full font-bold transition flex items-center gap-2 shadow-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    Abrir en pantalla completa
+                </a>
+            </div>
+
+            <div class="resource-viewer">
+                <iframe src="https://publuu.com/flip-book/552109/2107511?embed" width="100%" height="100%" allowfullscreen poster="https://publuu.com/flip-book/552109/2107511/thumb.jpg"></iframe>
+            </div>
+        </section>
+
+        <section class="mb-12 scroll-reveal">
+            <h3 class="text-xl font-bold text-unam-red mb-8 border-l-8 border-unam-gold pl-4 uppercase tracking-widest">Información del Recurso</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="resource-card p-8 rounded-xl shadow-sm">
+                    <div class="text-unam-gold mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-geology-dark mb-2 uppercase">Tipo de Material</h4>
+                    <p class="text-geology-dark text-sm leading-relaxed">Manual de prácticas geológicas, optimizado para consulta digital interactiva.</p>
+                </div>
+
+                <div class="resource-card p-8 rounded-xl shadow-sm">
+                    <div class="text-unam-gold mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-geology-dark mb-2 uppercase">Autoría</h4>
+                    <p class="text-geology-dark text-sm leading-relaxed">Desarrollado por el equipo académico del proyecto PAPIME, Facultad de Ingeniería - UNAM.</p>
+                </div>
+
+                <div class="resource-card p-8 rounded-xl shadow-sm">
+                    <div class="text-unam-gold mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-geology-dark mb-2 uppercase">Uso Académico</h4>
+                    <p class="text-geology-dark text-sm leading-relaxed">Material diseñado para fortalecer el aprendizaje práctico en el área de ingeniería geológica.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white mt-12 py-12 px-6 text-center border-t-4 border-unam-red">
+        <p class="text-geology-dark font-bold text-sm mb-6 uppercase tracking-widest">© 2026 UNAM - Facultad de Ingeniería. Todos los derechos reservados.</p>
+        <div class="flex justify-center space-x-10">
+            <a href="https://www.facebook.com/UNAM.MX.Oficial/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" class="w-7 h-7 grayscale hover:grayscale-0 transition"></a>
+            <a href="https://twitter.com/UNAM_MX" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="TW" class="w-7 h-7 grayscale hover:grayscale-0 transition"></a>
+            <a href="https://www.instagram.com/unam_mx/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="IG" class="w-7 h-7 grayscale hover:grayscale-0 transition"></a>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

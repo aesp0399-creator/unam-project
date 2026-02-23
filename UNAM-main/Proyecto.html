@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto - Ingeniería Geológica UNAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="Imagenes/escudo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-gold': '#b08d57', 
+                        'unam-red': '#8a1538',  
+                        'geology-beige': '#f5f2eb', 
+                        'geology-dark': '#2c2c2c',  
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f2eb; /* Fondo Beige Claro */
+            color: #2c2c2c;
+        }
+        
+        #menu-toggle:checked + .hamburger + .nav-menu {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-background {
+            background-color: #f5f2eb;
+            background-image: radial-gradient(rgba(176, 141, 87, 0.2) 1px, transparent 0);
+            background-size: 30px 30px;
+            position: relative;
+            border-bottom: 2px solid #b08d57;
+        }
+        
+        .hero-background::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, #f5f2eb 100%);
+            z-index: 1;
+        }
+
+        .hamburger {
+            cursor: pointer;
+            padding: 5px;
+            z-index: 50;
+            color: #2c2c2c;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Títulos de menú más grandes */
+        .nav-link {
+            font-size: 1.25rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: #8a1538; }
+
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto">
+        <header class="sticky top-0 z-40 w-full bg-white/90 shadow-md backdrop-blur-sm border-b border-unam-gold/30">
+            <nav class="py-6 px-6 md:px-10">
+                <div class="flex items-center justify-between">
+                    
+                    <div class="w-20 md:w-28 lg:w-32">
+                        <a href="https://www.ingenieria.unam.mx" target="_blank" rel="noopener noreferrer">
+                            <img src="https://www.ingenieria.unam.mx/nuestra_facultad/images/institucionales/escudo_fi_color.png" 
+                                alt="Logo Facultad de Ingeniería UNAM" 
+                                class="hover:scale-105 transition duration-300">
+                        </a>
+                    </div>
+                    
+                    <input type="checkbox" id="menu-toggle" class="hidden">
+                    <label for="menu-toggle" class="hamburger text-3xl md:hidden">&#9776;</label>
+
+                    <ul class="nav-menu absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-xl md:shadow-none hidden md:flex space-y-4 md:space-y-0 md:space-x-10 p-6 md:p-0 items-center justify-center text-center">
+                        <li><a href="index.html" class="nav-link text-geology-dark uppercase">Inicio</a></li>
+                        <li><a href="Proyecto.html" class="nav-link text-geology-dark uppercase">Proyecto</a></li>
+                        <li><a href="galeria_recorridos.html" class="nav-link text-geology-dark uppercase">Galeria</a></li>
+                        <li><a href="Modelos3D.html" class="nav-link text-geology-dark uppercase">Modelos 3D</a></li>
+                        <li><a href="libros.html" class="nav-link text-geology-dark uppercase">Manuales </a></li>
+                    </ul>
+
+                     <div class="w-20 md:w-28 lg:w-32">
+                        <a href="https://www.unam.mx" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.freelogovectors.net/wp-content/uploads/2020/01/UNAM_Universidad_Nacional_Autonoma_de_Mexico_Logo.png" 
+                                alt="Logo UNAM" 
+                                class="hover:scale-105 transition duration-300">
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="w-full">
+            
+            <section class="hero-background min-h-[40vh] flex flex-col items-center justify-center text-center px-4 py-16 md:py-20 mb-12">
+                <div class="relative z-10">
+                    <h1 class="font-serif text-5xl md:text-7xl font-bold text-unam-red mb-4 tracking-tight">
+                        Nuestro Proyecto
+                    </h1>
+                    <p class="text-xl md:text-2xl text-unam-gold font-medium italic max-w-2xl mx-auto tracking-widest uppercase">
+                        Patrimonio, equipo y acervo histórico.
+                    </p>
+                </div>
+            </section>
+
+            <section class="max-w-4xl mx-auto px-6 py-8 space-y-12">
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-unam-red scroll-reveal" data-delay="0">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-unam-red mb-8 border-b-2 border-unam-gold/30 pb-2 flex items-center uppercase">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target mr-3"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        Objetivos Principales
+                    </h2>
+                    <div class="text-geology-dark text-lg space-y-6">
+                        <p class="mb-6 font-semibold text-xl italic text-unam-gold">Nuestra misión se centra en la divulgación y conservación del patrimonio mineralógico:</p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            
+                            <div class="bg-geology-beige p-6 rounded-lg shadow-md border border-unam-gold/20 hover:border-unam-red transition duration-300">
+                                <div class="flex items-start mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8a1538" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-1 mr-3 flex-shrink-0"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                                    <h3 class="text-xl font-bold text-geology-dark leading-tight">Documentación de Identidad Mineralógica</h3>
+                                </div>
+                                <p class="text-geology-dark/80 text-base leading-relaxed">
+                                    Elaborar documentos esenciales que aporten a la identidad mineralógica del país y sirvan como referente para eventos de divulgación, geoturismo y material didáctico.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-geology-beige p-6 rounded-lg shadow-md border border-unam-gold/20 hover:border-unam-red transition duration-300">
+                                <div class="flex items-start mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8a1538" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-1 mr-3 flex-shrink-0"><path d="M12 12V2"/><path d="M12 2v10"/><path d="M12 12h10"/><path d="M12 12H2"/></svg>
+                                    <h3 class="text-xl font-bold text-geology-dark leading-tight">Guía de Colecciones y Equipo Histórico</h3>
+                                </div>
+                                <p class="text-geology-dark/80 text-base leading-relaxed">
+                                    Desarrollar la Guía de excursiones a localidades mineralógicas de México y el libro sobre el Acervo Histórico del Laboratorio de Mineralogía de la Facultad de Ingeniería.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-unam-gold flex flex-col items-center text-center scroll-reveal" data-delay="150">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-unam-red mb-6 border-b-2 border-unam-gold/30 pb-2 uppercase">
+                        Participantes
+                    </h2>
+                    <p class="text-geology-dark/80 mb-8 text-lg font-medium">
+                        Conoce al equipo de académicos, técnicos y estudiantes que hacen posible este proyecto.
+                    </p>
+                    <a href="participantes.html" class="bg-unam-red hover:bg-unam-gold text-white font-bold py-4 px-10 rounded-full shadow-lg transition duration-300 transform hover:scale-105 flex items-center uppercase tracking-widest text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-1.5-1.5-3-3-3s-3 1.5-3 3"/><path d="M19 10a4 4 0 0 0-4-4"/></svg>
+                        Ver Equipo Completo
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-unam-red scroll-reveal" data-delay="300">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-unam-red mb-6 border-b-2 border-unam-gold/30 pb-2 uppercase text-center">
+                        Agradecimientos
+                    </h2>
+                    <div class="text-geology-dark text-lg leading-relaxed text-center">
+                        <p class="mb-4 font-medium">
+                            A la <span class="text-unam-gold font-bold">Dirección General de Asuntos del Personal Académico de la UNAM</span> por el apoyo al proyecto:
+                        </p>
+                        <p class="text-unam-red font-bold text-xl italic uppercase tracking-tighter">
+                            PAPIME PE108024
+                        </p>
+                        <p class="mt-4 text-sm font-semibold text-geology-dark/60 uppercase">
+                            Convocatoria 2026
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="bg-white mt-12 py-10 px-6 text-center border-t-4 border-unam-red shadow-inner">
+            <p class="text-geology-dark font-bold text-sm mb-3">© 2026 UNAM - Facultad de Ingeniería. Todos los derechos reservados.</p>
+            <p class="text-geology-dark/50 text-xs mb-6 uppercase tracking-widest">Ciudad Universitaria, Cd. Mx., CP 04510</p>
+            <div class="social-media flex justify-center space-x-6">
+                <a href="https://www.facebook.com/UNAM.MX.Oficial/" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-7 h-7">
+                </a>
+                <a href="https://twitter.com/UNAM_MX" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" class="w-7 h-7">
+                </a>
+                <a href="https://www.instagram.com/unam_mx/" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" class="w-7 h-7">
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }, delay);
+                    }
+                });
+            }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+            elements.forEach(element => observer.observe(element));
+            
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { menuToggle.checked = false; }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

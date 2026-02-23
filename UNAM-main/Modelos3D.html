@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos 3D - Ingeniería Geológica UNAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="Imagenes/escudo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-gold': '#b08d57', 
+                        'unam-red': '#8a1538',  
+                        'geology-beige': '#f5f2eb', 
+                        'geology-dark': '#2c2c2c',  
+                    },
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estética Beige con alto contraste */
+        body { background-color: #f5f2eb; color: #2c2c2c; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        .header-bg { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 2px solid #b08d57; }
+
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; letter-spacing: -0.05em; line-height: 1; color: #8a1538; }
+        
+        /* Contenedor del Carrusel */
+        .slider-container { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; height: 65vh; }
+        .item { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease-in-out; }
+        .item.active { display: flex; opacity: 1; }
+
+        /* Iframe con borde mineral */
+        iframe { width: 100%; height: 100%; border-radius: 1.5rem; border: 2px solid #b08d57; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); background: #fff; }
+
+        /* Botones de navegación */
+        .btn-nav { position: absolute; top: 50%; transform: translateY(-50%); background: white; color: #8a1538; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; border: 2px solid #b08d57; z-index: 20; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-nav:hover { background: #8a1538; color: white; border-color: transparent; box-shadow: 0 0 20px rgba(138, 21, 56, 0.3); }
+
+        /* CORRECCIÓN: Se cambió 'shadow:' por 'box-shadow:' para eliminar el error */
+        .tag-category { background: #8a1538; color: white; padding: 6px 20px; border-radius: 99px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        /* Títulos de menú */
+        .nav-link { font-size: 1.25rem; font-weight: 700; transition: color 0.3s; }
+    </style>
+</head>
+<body>
+
+    <header class="header-bg sticky top-0 z-50">
+        <nav class="container mx-auto py-6 px-10 flex items-center justify-between">
+            <div class="w-24 md:w-32">
+                <img src="https://www.ingenieria.unam.mx/nuestra_facultad/images/institucionales/escudo_fi_color.png" alt="Logo FI">
+            </div>
+            
+            <ul class="nav-menu hidden md:flex space-x-10 items-center justify-center text-center">
+                <li><a href="index.html" class="nav-link text-geology-dark hover:text-unam-red">Inicio</a></li>
+                <li><a href="Proyecto.html" class="nav-link text-geology-dark hover:text-unam-red">Proyecto</a></li>
+                <li><a href="galeria_recorridos.html" class="nav-link text-geology-dark hover:text-unam-red">Galeria</a></li>
+                <li><a href="Modelos3D.html" class="nav-link text-unam-red underline decoration-4 underline-offset-8">Modelos 3D</a></li>
+                <li><a href="libros.html" class="nav-link text-geology-dark hover:text-unam-red">Manuales</a></li>
+            </ul>
+
+            <div class="w-24 md:w-32">
+                <img src="https://cdn.freelogovectors.net/wp-content/uploads/2020/01/UNAM_Universidad_Nacional_Autonoma_de_Mexico_Logo.png" alt="Logo UNAM">
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section class="mb-16">
+            <h1 class="hero-title">Modelos 3D</h1>
+            <p class="text-xl text-unam-gold font-bold italic mt-2">Muestras de Minerales y Equipo Histórico FI-UNAM</p>
+        </section>
+
+        <div class="slider-container">
+            <div class="item active">
+                <div class="tag-category">Minerales - Charcas, SLP</div>
+                <iframe title="Danburita" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/8dc0768c69f34d49a926cd5bb4fc05ba/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Danburita</p>
+            </div>
+
+            <div class="item">
+                <div class="tag-category">Equipo Óptico Antiguo</div>
+                <iframe title="Goniómetro" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/471f62c48f014386b3884bddec67cfe6/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Goniómetro de Precisión</p>
+            </div>
+
+            <div class="item">
+                <div class="tag-category">Equipo Óptico Antiguo</div>
+                <iframe title="Oculares" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/d0d84be89b144be49028df04e76fb590/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Set de Oculares Históricos</p>
+            </div>
+
+            <div class="item">
+                <div class="tag-category">Equipo Óptico Antiguo</div>
+                <iframe title="Microscopio FI UNAM" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/3056a2b440524c69968141cda971da07/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Microscopio FI UNAM</p>
+            </div>
+
+            <div class="item">
+                <div class="tag-category">Equipo Óptico Antiguo</div>
+                <iframe title="Microscopio en Caja" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/f658b12a6fcc4ac990e62ffb7100c5b0/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Microscopio de Conservación</p>
+            </div>
+
+            <div class="item">
+                <div class="tag-category">Maquetas de Ingeniería</div>
+                <iframe title="Maqueta de pozo de perforación FI UNAM" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/ba6e5670b2f44e54b4170b303498c300/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Pozo de Perforación FI UNAM</p>
+            </div>
+
+            <div class="item">
+                <div class="tag-category">Equipo de Oficina Histórico</div>
+                <iframe title="Máquina de escribir" frameborder="0" allowfullscreen allow="autoplay; xr-spatial-tracking" src="https://sketchfab.com/models/1db83b1ff2cb4ab7ab878c8330bc43bc/embed?autostart=1"></iframe>
+                <p class="mt-6 text-2xl font-black uppercase tracking-tighter text-unam-red">Máquina de Escribir Antigua</p>
+            </div>
+
+            <button id="prev" class="btn-nav left-[-30px]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="4" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="next" class="btn-nav right-[-30px]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="4" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </main>
+
+    <footer class="bg-white mt-12 py-10 px-6 text-center border-t-4 border-unam-red shadow-inner">
+        <p class="text-geology-dark font-bold text-sm mb-6 uppercase tracking-widest">© 2026 UNAM - Facultad de Ingeniería. Todos los derechos reservados.</p>
+        <div class="flex justify-center space-x-10">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" class="w-7 h-7 grayscale hover:grayscale-0 transition cursor-pointer">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="TW" class="w-7 h-7 grayscale hover:grayscale-0 transition cursor-pointer">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="IG" class="w-7 h-7 grayscale hover:grayscale-0 transition cursor-pointer">
+        </div>
+    </footer>
+
+    <script>
+        const items = document.querySelectorAll('.item');
+        let currentItem = 0;
+
+        document.getElementById('next').onclick = () => {
+            items[currentItem].classList.remove('active');
+            currentItem = (currentItem + 1) % items.length;
+            items[currentItem].classList.add('active');
+        };
+
+        document.getElementById('prev').onclick = () => {
+            items[currentItem].classList.remove('active');
+            currentItem = (currentItem - 1 + items.length) % items.length;
+            items[currentItem].classList.add('active');
+        };
+    </script>
+</body>
+</html>

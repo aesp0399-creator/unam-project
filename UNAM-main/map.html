@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo - Localidades Mineralógicas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'unam-red': '#cc0033',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- ESTILOS BASE Y CONTENEDOR --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* --- ESTILOS DEL MAPA Y TOOLTIP --- */
+        .map-container-custom {
+            position: relative; 
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            background-color: transparent;
+        }
+
+        /* Estilo para los Puntos Dinámicos */
+        .map-point {
+            position: absolute;
+            width: 30px; 
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #cc0033;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s;
+            pointer-events: all;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-point span {
+            color: #cc0033;
+            font-weight: bold;
+            font-size: 14px;
+            pointer-events: none;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+        
+        /* Estilo para la caja de información flotante (tooltip) */
+        #info-box-map {
+            position: absolute; 
+            background-color: rgba(30, 41, 59, 0.95);
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 15px rgba(204, 0, 51, 0.6);
+            border: 2px solid #cc0033;
+            z-index: 1000;
+            max-width: 250px;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #info-box-map.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #mapa-base {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <section id="mapa-interactivo-principal" class="max-w-6xl mx-auto px-6 py-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-8 text-center border-b-2 border-red-700 pb-2">
+            Mapa Interactivo de Localidades Mineralógicas
+        </h1>
+        <p class="text-gray-400 text-lg text-center mb-10">
+            Pasa el cursor sobre los números en el mapa para ver los detalles de cada localidad minera.
+        </p>
+
+        <div class="map-container-custom">
+            <img id="mapa-base" src="map.jpg" 
+                alt="Mapa de México con puntos de interés mineralógico">
+            
+            <div id="info-box-map">
+                <h4 id="info-nombre-map" class="text-red-700 font-extrabold text-lg mb-1">Localidad</h4>
+                <p id="info-minerales-map" class="text-gray-300 text-sm italic">Minerales:</p>
+                <a id="info-link-map" href="#" target="_blank" class="text-blue-500 hover:text-red-700 font-semibold text-sm mt-2 block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download inline-block mr-1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Descargar Folleto
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <a href="index.html" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                Regresar a Inicio
+            </a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 0. CONFIGURACIÓN ---
+            const ORIGINAL_WIDTH = 978; 
+            const ORIGINAL_HEIGHT = 1163; 
+
+            // Datos de las Localidades [X, Y, Nombre, Minerales, Folleto URL]
+            const LOCALIDADES = [
+                [185, 120, "1. El Boleo, B.C.S.", "Boleita, Cumengeita, Pseudoboleita, Anglesita", "folleto_sitio_1.pdf"],
+                [235, 230, "17. Milpillas, Sonora", "Azurita, Brochantita, Crisocola, Cuprita, Malaquita, Cobre Nativo", "folleto_sitio_17.pdf"],
+                [345, 275, "3. Santa Eulalia, Chihuahua", "Fluorita, Yeso, Goethita, Rodocrosita", "folleto_sitio_3.pdf"],
+                [315, 345, "2. Naica, Chihuahua", "Yeso, Galena, Esfalerita", "folleto_sitio_2.pdf"],
+                [425, 400, "5. La Ojuela, Mapimí, Durango", "Adamita, Legrandita, Mimetita, Wulfenita, Hemimorfita, Fluorita", "folleto_sitio_5.pdf"],
+                [395, 465, "4. Cerro de Mercado, Durango", "Apatita, Magnetita, Maghemita", "folleto_sitio_4.pdf"],
+                [450, 505, "19. Fresnillo, Zacatecas", "Pirargirita, Plata nativa", "folleto_sitio_19.pdf"],
+                [510, 555, "13. Charcas, S.L.P.", "Danburita, Datolita, Borcarita, Ninfotovita", "folleto_sitio_13.pdf"],
+                [540, 575, "14. El Coyote, S.L.P.", "Celestita", "folleto_sitio_14.pdf"],
+                [520, 610, "15. El Tepetate, S.L.P.", "Topacio, Casiterita, Hematita", "folleto_sitio_15.pdf"],
+                [555, 625, "16. Joya Honda, S.L.P.", "Xenolitos de peridotita, Granulitas, Anfibolitas", "folleto_sitio_16.pdf"],
+                [580, 660, "12. El Redentor, Querétaro", "Opalo", "folleto_sitio_12.pdf"],
+                [698, 745, "18. Tatatila, Veracruz", "Cuarzo amatista, Cuarzo ahumado, Granate, Ortoclasa, Stellerita", "folleto_sitio_18.pdf"],
+                [620, 805, "6. Xalostoc, Morelos", "Granate, Vesuvianita, Calcita azul", "folleto_sitio_6.pdf"],
+                [645, 888, "8. El Tejocote, Mixtepec, Oaxaca", "Estibinita, Estibiconita", "folleto_sitio_8.pdf"],
+                [675, 850, "7. El Muerto, Huitzo, Oaxaca", "Allanita, Ortoclasa, Flogopita", "folleto_sitio_7.pdf"],
+                [670, 868, "9. La Joya, Oaxaca", "Flogopita, Diopsida, Ortoclasa, Pertita, Zircón", "folleto_sitio_9.pdf"],
+                [700, 885, "10. La Pachita, Ayoquezco, Oaxaca", "Escapolita, Diopsida. Calcita rosa, Zircón", "folleto_sitio_10.pdf"],
+                [720, 900, "11. Telixtlahuaca, Oaxaca", "Grafito cristalino", "folleto_sitio_11.pdf"]
+            ];
+
+            // --- 1. REFERENCIAS Y CÁLCULO DE ESCALA ---
+            const infoBox = document.getElementById('info-box-map');
+            const infoNombre = document.getElementById('info-nombre-map');
+            const infoMinerales = document.getElementById('info-minerales-map');
+            const infoLink = document.getElementById('info-link-map');
+            const mapContainer = document.querySelector('.map-container-custom');
+            const mapImage = document.getElementById('mapa-base');
+            
+            let currentScaleFactor;
+
+            // Función para actualizar los puntos y el factor de escala
+            const updateMapPoints = () => {
+                if (mapImage.offsetWidth === 0) return;
+                
+                currentScaleFactor = mapImage.offsetWidth / ORIGINAL_WIDTH;
+
+                LOCALIDADES.forEach((data, index) => {
+                    const [originalX, originalY] = data;
+                    
+                    const scaledX = originalX * currentScaleFactor;
+                    const scaledY = originalY * currentScaleFactor;
+
+                    const point = document.getElementById(`map-point-${index}`);
+                    if (point) {
+                        point.style.left = `${scaledX}px`;
+                        point.style.top = `${scaledY}px`;
+                    }
+                });
+            };
+
+            // --- 2. INYECCIÓN DE PUNTOS DINÁMICOS ---
+            const injectPoints = () => {
+                LOCALIDADES.forEach((data, index) => {
+                    const [x, y, nombre] = data;
+                    
+                    const pointDiv = document.createElement('div');
+                    pointDiv.className = 'map-point';
+                    pointDiv.id = `map-point-${index}`;
+                    pointDiv.setAttribute('data-nombre', nombre);
+                    pointDiv.setAttribute('data-minerales', data[3]);
+                    pointDiv.setAttribute('data-link', data[4]);
+                    
+                    // Solo el número (sin el punto)
+                    pointDiv.innerHTML = `<span>${nombre.split('.')[0]}</span>`;
+                    
+                    mapContainer.appendChild(pointDiv);
+                });
+            }
+
+            // --- 3. LÓGICA DE INTERACTIVIDAD ---
+            const showInfo = (event) => {
+                const point = event.currentTarget;
+                const nombre = point.getAttribute('data-nombre');
+                const minerales = point.getAttribute('data-minerales');
+                const link = point.getAttribute('data-link');
+                
+                infoNombre.textContent = nombre;
+                infoMinerales.textContent = `Minerales: ${minerales}`;
+                infoLink.href = link;
+                
+                infoBox.style.visibility = 'visible'; 
+                infoBox.style.opacity = 0; 
+                
+                const rect = mapContainer.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                
+                const boxWidth = infoBox.offsetWidth;
+                const boxHeight = infoBox.offsetHeight;
+                const containerWidth = mapContainer.offsetWidth;
+                const containerHeight = mapImage.offsetHeight; 
+                
+                let finalX = x + 15; 
+                let finalY = y + 15; 
+
+                if (finalX + boxWidth > containerWidth) {
+                    finalX = x - boxWidth - 15; 
+                }
+
+                if (finalY + boxHeight > containerHeight) {
+                     finalY = y - boxHeight - 15; 
+                } 
+                
+                infoBox.style.left = `${finalX}px`;
+                infoBox.style.top = `${finalY}px`;
+                
+                infoBox.classList.add('visible');
+                infoBox.style.opacity = 1; 
+            };
+
+            const hideInfo = () => {
+                infoBox.classList.remove('visible');
+                infoBox.style.opacity = 0;
+                
+                setTimeout(() => {
+                    infoBox.style.visibility = 'hidden';
+                }, 300); 
+            };
+            
+            // --- 4. INICIALIZACIÓN Y EVENTOS ---
+            injectPoints();
+
+            const dynamicPoints = document.querySelectorAll('.map-point');
+            dynamicPoints.forEach(point => {
+                point.addEventListener('mouseover', showInfo);
+                point.addEventListener('mouseout', hideInfo);
+                point.addEventListener('mousemove', showInfo); 
+            });
+
+            mapImage.addEventListener('load', updateMapPoints);
+            updateMapPoints(); 
+
+            window.addEventListener('resize', updateMapPoints);
+        });
+    </script>
+</body>
+</html>
